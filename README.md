@@ -1,1 +1,1 @@
-cs5008 with Prof. Lee
+Di En Sung: sung.di@northeastern.edu
