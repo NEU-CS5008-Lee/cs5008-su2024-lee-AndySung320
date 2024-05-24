@@ -1,3 +1,6 @@
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
+
 #include <stdio.h>
 #define N 8 //Max. capacity of Queue
 
@@ -35,15 +38,34 @@ int peek(int *arr)
 void enqueue(int data, int *arr)
 {
     //insert your code here
-
- 
+    if (isfull(*arr)){
+        printf("Queue is full.\n");
+    }
+    else{
+        arr[rear+1] = data;
+        rear ++;
+    }
 }
 
 /*----Function to remove the elements from the queue----*/
 int dequeue(int *arr)
 {   
     //insert your code here
-
+    if (isempty(*arr)){
+        printf("Queue is empty.\n");
+    }
+    int deq = arr[front+1];
+    if (rear == 0){
+        rear --;
+        return deq;
+    }
+    else{
+        for(int i = 1; i<rear+1; i++){
+            arr[i-1] = arr[i];
+        }
+    }
+    rear --;
+    return deq;
 }
 
 /*---Function to display the elements of the queue-------*/
@@ -87,8 +109,10 @@ int main()
 
     for(int i=0;i<N-1;i++){
         printf("dequeued element is: %d\n",dequeue(arr));
+        //printf("%d, %d\n", rear, front);
     }
-    display(arr);
+
     printf("The element at the front of the queue is: %d\n",peek(arr));
+    display(arr);
     return 0;
 }
