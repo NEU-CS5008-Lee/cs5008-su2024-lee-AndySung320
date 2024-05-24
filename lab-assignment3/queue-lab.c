@@ -53,16 +53,12 @@ int dequeue(int *arr)
     //insert your code here
     if (isempty(*arr)){
         printf("Queue is empty.\n");
+        return -1;
     }
+
     int deq = arr[front+1];
-    if (rear == 0){
-        rear --;
-        return deq;
-    }
-    else{
-        for(int i = 1; i<rear+1; i++){
-            arr[i-1] = arr[i];
-        }
+    for(int i = 0; i<rear; i++){
+        arr[i] = arr[i+1];
     }
     rear --;
     return deq;
