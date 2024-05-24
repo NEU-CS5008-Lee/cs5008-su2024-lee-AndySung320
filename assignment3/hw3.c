@@ -116,9 +116,13 @@ void enqueue(queue_t* q_p, int d) {
 
       // ***** INSERT YOUR CODE HERE *****
       n_p = newNode(d);
-      n_p->left_p = q_p->tail_p;
-      q_p->tail_p->right_p = n_p;
-      q_p->tail_p = n_p;
+      // n_p->left_p = q_p->tail_p;
+      // q_p->tail_p->right_p = n_p;
+      // q_p->tail_p = n_p;
+
+      n_p->right_p = q_p->tail_p;
+      q_p->tail_p->left_p = n_p;
+      q_p->tail_p = n_p;      
 
     }    
   }
@@ -149,8 +153,8 @@ int dequeue(queue_t* q_p) {
 
 	  // ***** INSERT YOUR CODE HERE *****
     node_t* temp = q_p->head_p;
-    q_p->head_p = q_p->head_p->right_p;
-    temp->right_p = NULL;
+    q_p->head_p = q_p->head_p->left_p;
+    temp->left_p = NULL;
 	  
 	}
 	
