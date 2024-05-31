@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -38,8 +38,19 @@ void selection_sort_2arr(int* source, int* dest, bool* valid)
   for (int i=0; i<LIMIT; i++) {
 
   // INSERT YOUR CODE HERE
-
+    smallest = i;
+    for (int j=0; j<LIMIT; j++){
+      if ((source[j] < source[smallest] || valid[smallest]==false) && valid[j]==true){
+        // When valid[smallest]==false, it means that value at index "smallest" has been checked before.
+        // as if we compare value at index "j" with 999999 (a huge number).
+        // Hence, we have to assign "j" to "smallest".
+        smallest = j;
+      }
+    }
+    dest[i] = source[smallest];
+    valid[smallest] = false; // set false at index where we find the min-value.
   }
+
 }
 
 
@@ -51,7 +62,15 @@ void selection_sort_1arr(int* source)
   for (int i=0; i<LIMIT; i++) {
 
   // INSERT YOUR CODE HERE
-
+    smallest = i;
+    for (int j=i+1; j<LIMIT; j++){
+      if (source[j]<source[smallest]){
+        smallest = j;
+      }
+    }
+    temp = source[i];
+    source[i] = source[smallest];
+    source[smallest] = temp;
   }
 }
 
