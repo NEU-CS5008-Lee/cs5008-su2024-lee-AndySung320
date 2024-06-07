@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,10 +37,7 @@ int getPivot(char* arr, int start, int end) {
     int i = start;
     int pivot_val = (int)upperChar(arr[end]);   	// Pivot is the last element
                                                   // and check if it is lower case
-    
     char tmp;
-
-    // Add your code here
     for (int j=start; j<end; j++){
         if ((int)upperChar(arr[j]) <= pivot_val){
             tmp = arr[i];
