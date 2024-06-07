@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,6 +40,31 @@ void mergeIt(
   
 
   // ADD YOUR CODE HERE
+  int left = leftStart;
+  int mid = leftStop;
+  int right = rightStart;
+  int tmp[LIMIT];
+  int tmpP = leftStart;
+  while (left <= mid && right <= rightStop){
+    if ((int)data[left] < (int)data[right]){ // covert the "char" to integer
+      tmp[tmpP++] = data[left++]; 
+    }
+    else{
+      tmp[tmpP++] = data[right++];
+    }
+  }
+
+  while (left <= leftStop){
+    tmp[tmpP++] = data[left++];
+  }
+
+  while (right <= rightStop){
+    tmp[tmpP++] = data[right++];
+  }
+
+  for (int i=leftStart; i<=rightStop; i++){
+    data[i] = tmp[i];
+  }
   
   return;
 }
