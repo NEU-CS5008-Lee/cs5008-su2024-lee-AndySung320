@@ -32,13 +32,40 @@ char upperChar(char c){
 }
 
 
+int getPivot(char* arr, int start, int end) {
+
+    int i = start;
+    int pivot_val = (int)upperChar(arr[end]);   	// Pivot is the last element
+                                                  // and check if it is lower case
+    
+    char tmp;
+
+    // Add your code here
+    for (int j=start; j<end; j++){
+        if ((int)upperChar(arr[j]) <= pivot_val){
+            tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+            i++; 
+        }
+    }
+    tmp = arr[i];
+    arr[i] = pivot_val;
+    arr[end] = tmp;
+    return i;
+
+}
 
 // pick pivot and then sort small and big parts 
 void quicky(char* data, int left, int right) {
 
-  // ADD YOUR CODE HERE
+    // Add your code here
+    if (left <= right){
+      int pivot = getPivot(data, left, right);
+      quicky(data, left, pivot-1);
+      quicky(data, pivot+1, right);
+    }
 
-  return;
 }
 
 
