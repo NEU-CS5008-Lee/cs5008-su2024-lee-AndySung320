@@ -132,6 +132,20 @@ node_t* Insert(node_t* root, int data)
     
     //insert your code here
 
+    // Insert the new tree node just like what
+    // we did in binary_search_tree.c
+    if (root == NULL){
+        node_t* newTNode = NewNode(data);
+        root = newTNode;
+        return root;
+    }
+
+    if (data < root->data){
+        root->left = Insert(root->left, data);
+    }
+    else{
+        root->right = Insert(root->right, data);
+    }
 
     /*updating the height after insertion of the node*/
     root->height = max(height(root->left),height(root->right))+1;
