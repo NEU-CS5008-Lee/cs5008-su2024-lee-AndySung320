@@ -300,6 +300,9 @@ void breadthFirst (tnode_t* root) {
 
     // enqueue(q, temp->left);
     // enqueue(q, temp->right);
+
+    
+    freeQueue(q); // Ensure the queue is freed after traversal
   }
   
 }
