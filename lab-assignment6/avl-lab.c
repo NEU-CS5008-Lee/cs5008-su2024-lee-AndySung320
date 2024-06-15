@@ -1,5 +1,5 @@
-/*---enter your name here----*/
-/*---enter your email here-----*/
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 #include<stdio.h>
 #include<stdlib.h>
