@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -244,27 +244,64 @@ void freeQueue(queue_t* qp) {
 
 void preorder (tnode_t* np) {
   // INSERT YOUR CODE HERE
-
-  return;
+  if (np == NULL){
+    return;
+  }
+  printf("%c", np->data);
+  preorder(np->left);
+  preorder(np->right);
 }
 
 void inorder (tnode_t* np) {
   // INSERT YOUR CODE HERE
-  
-  return;
+  if (np == NULL){
+    return;
+  }
+  inorder(np->left);
+  printf("%c", np->data);
+  inorder(np->right);
 }
 
 void postorder (tnode_t* np) {
   // INSERT YOUR CODE HERE
-  
-  return;
+  if (np == NULL){
+    return;
+  }
+  postorder(np->left);
+  postorder(np->right);
+  printf("%c", np->data);
 }
 
 
 void breadthFirst (tnode_t* root) {
   // INSERT YOUR CODE HERE
+  if (root == NULL){
+    return;
+  }
+  queue_t* q = newQueue();
+  enqueue(q, root);
+  while (!isEmpty(q)){
+    tnode_t* temp = dequeue(q); // pop out the node from  the queue
+    printf("%c", temp->data);
+
+    // Before enqueuing temp->left and temp->right,
+    // we need to check if it is "NULL" to prevent the program from
+    // crashing.
+    if (temp->left != NULL){
+      enqueue(q, temp->left);
+    }
+    if (temp->right != NULL){
+      enqueue(q, temp->right);
+    }
+
+    // Note: if we just add temp->left or temp->right to the queue,
+    // the result won't be correct because we might add NULL pointer
+    // to the queue.
+
+    // enqueue(q, temp->left);
+    // enqueue(q, temp->right);
+  }
   
-  return;
 }
 
 
