@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 // format of document is a bunch of data lines beginning with an integer (rank which we ignore)
 // then a ',' followed by a double-quoted string (city name)
@@ -91,7 +91,7 @@ int main () {
 	    // look a digit to confirm a valid line
 	    if (isDigit(inputLine[nextChar])) {
 	      state = S1;
-	      appendChar(temp, inputLine[nextChar]);
+	      appendChar(temp, inputLine[nextChar]); 
 	    } else {
 	      state = ERRORSTATE;
 	    }  
@@ -99,7 +99,71 @@ int main () {
 
 
 	  // ADD YOUR CODE HERE
- 
+    case S1:
+      ; // add ";" to avoid error
+        // error: a label can only be part of a statement and a declaration is not a statement
+      int comma = ',';
+      if (isDigit(inputLine[nextChar])){
+        state = S1;
+      }
+      else if(inputLine[nextChar] == comma)
+      {
+        state = S2;
+      }
+      break;
+    
+    case S2:
+      ;
+      int quotation = '\"';
+      if (inputLine[nextChar] == quotation){
+        state = S3;
+        strcpy(cityStr,""); // cityStr = ""  (initialize the variable)
+      }
+      break;
+
+    case S3:
+
+      if (inputLine[nextChar] == quotation){
+        state = S4;
+      }
+      else {
+        appendChar(cityStr, inputLine[nextChar]); // append character to cityStr
+      }
+      break;
+    
+    case S4:
+     if (inputLine[nextChar] == comma){
+        state = S5;
+     }
+     break;
+
+    case S5:
+      if (inputLine[nextChar] == quotation){
+        state = S6;
+        popInt = 0; // initialize popInt to 0;
+      }
+      else{
+        state = ACCEPTSTATE;
+        popInt = 0;
+      }
+      break;
+    
+    case S6:
+      if (inputLine[nextChar] == comma){
+        state = S6;
+      }
+      else if (isDigit(inputLine[nextChar]))
+      {
+        popInt = 10*popInt + (int)inputLine[nextChar] - '0'; // Convert a character digit to the corresponding integer
+        state = S6;
+      }
+      else{
+        state = ACCEPTSTATE;
+      }
+      break;
+      
+      
+      
 	    
 	  case ACCEPTSTATE:
 	    // nothing to do - we are done!
