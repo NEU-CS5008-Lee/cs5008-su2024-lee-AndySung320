@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 // Hash table with doubly linked list for chaning/
 #include <stdio.h>
@@ -12,21 +12,29 @@ int BUCKET_SIZE = 10;
 struct node {
 
     // Add your code here
-
+    int key;
+    int value;
+    struct node* prev;
+    struct node* next;
 };
 
 // bucket struct
 struct bucket{
 
     // Add your code here
-
+    struct node* head;
+    int count;
 };
 
 // create a new node
 struct node* createNode(int key, int value){
 
     // Add your code here
-
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->key = key;
+    newNode->value = value;
+    newNode->prev = NULL;
+    newNode->next = NULL;
     return newNode;
 }
 
@@ -79,6 +87,10 @@ void display(){
 
 int main(){
     hashTable = (struct bucket *)malloc(BUCKET_SIZE * sizeof(struct bucket));
+    for (int i = 0; i < BUCKET_SIZE; i++) {
+        hashTable[i].head = NULL;
+        hashTable[i].count = 0;
+    }
     
     add(0, 1);
     add(1, 10);
