@@ -48,6 +48,21 @@ void add(int key, int value){
     int hashIndex = hashFunction(key);
     
     // Add your code here
+    struct node* newNode = createNode(key, value);
+    if (hashTable[hashIndex].count == 0){
+        hashTable[hashIndex].count = 1;
+        hashTable[hashIndex].head = newNode;
+        newNode->prev = hashTable[hashIndex].head;         
+    }
+    else{
+        // handle the pointer correctly because it is
+        // doubly linked list for chaning         
+        hashTable[hashIndex].head->prev = newNode;
+        newNode->next = hashTable[hashIndex].head;
+        hashTable[hashIndex].head = newNode;
+        newNode->prev = hashTable[hashIndex].head;
+        hashTable[hashIndex].count++;
+    }
 
 }
 
@@ -56,6 +71,55 @@ void remove_key(int key){
     int hashIndex = hashFunction(key);
 
     // Add your code here
+    struct node* node;
+    struct node* before;
+    node = hashTable[hashIndex].head;
+
+    if (node == NULL){
+        printf("\nno key found");
+        return;
+    }
+
+    while (node != NULL)
+    {
+        if (node->key == key){
+            // change a pointer
+
+            // Aside from whether the node is head, there are two scenario:
+            // 1. the node that we want to remove has a neighbor
+            // 2. the node that we want to remove does not has a neighbor
+            if (node == hashTable[hashIndex].head){
+                if (hashTable[hashIndex].head->next == NULL){
+                    hashTable[hashIndex].head = NULL;
+                }
+                else{
+                    hashTable[hashIndex].head = node->next;
+                    node->prev = NULL;
+                    node->next->prev = hashTable[hashIndex].head;
+                    node->next = NULL;
+                }
+            }
+            else{
+                if (before->next->next == NULL){
+                    before->next = NULL;
+                }
+                else{
+                    before->next = node->next;
+                    node->prev = NULL;
+                    node->next->prev = before;
+                    node->next = NULL;
+                }
+            }
+            hashTable[hashIndex].count--;
+            free(node);
+            printf("\n[ %d ] is removed. \n", key);
+            return;
+        }
+        before = node;
+        node = node->next;
+    }
+    printf("\n[ %d ] is not found.\n", key);
+    return;
 
 }
 
@@ -65,6 +129,15 @@ void search(int key){
     struct node* node = hashTable[hashIndex].head;
 
     // Add your code here
+    while (node != NULL){
+        if (node->key == key){
+            printf("key %d founded\n", key);
+            printf("key: [%d]  value: [%d]\n", key, node->value);
+            return;
+        }
+        node = node->next;
+    }
+    printf("key %d not found\n", key);
 
 }
 
