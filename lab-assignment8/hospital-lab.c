@@ -1,6 +1,6 @@
 /* Lab Assignment for Hospital ER */
-//enter your name here
-//enter your email here
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -49,6 +49,18 @@ void heapify(pq*p2,int n, int i ){
     int lchild=2*i+1;/*left =2*i+1*/
     int rchild=2*i+2;/*right=2*i+2*/
     /*insert your code here*/
+    if (lchild < n && p2->heap[lchild].priority >= p2->heap[largest].priority){
+        largest = lchild;
+    }
+    if (rchild < n && p2->heap[rchild].priority >= p2->heap[largest].priority){
+        largest = rchild;
+    }
+    if (largest != i){
+        //swap largest with i
+        // recursively heapify the subtree
+        swap(&(p2->heap[largest]), &(p2->heap[i]));
+        heapify(p2, n, largest);
+    }
 
 }
 
@@ -56,8 +68,15 @@ void heapify(pq*p2,int n, int i ){
 void shiftUp(pq* p2,int i)
 {
     /*insert your code here*/
-       
-    
+    if (i == 0){
+        return;
+    }
+    int parent = (i-1)/2;
+    while (i != 0 && p2->heap[i].priority > p2->heap[parent].priority){
+        swap(&(p2->heap[i]), &(p2->heap[parent]));
+        i = (i-1)/2;
+        parent = i;
+    }
 }
  
 /*function to insert patient info into the heap*/
