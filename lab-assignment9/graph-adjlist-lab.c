@@ -1,5 +1,5 @@
-//enter your email here
-//enter your name here
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -59,7 +59,7 @@ int numberoflistspresent(Graph* graph)
 int search(char* name, Graph* graph)
 {
     int i;
-    for(i=0;i<numberOfListspresent(graph);i++){
+    for(i=0;i<numberoflistspresent(graph);i++){
         if(strcmp(graph->adjLists[i]->name,name)==0){
             return i;    //position of person in the list
         }
@@ -72,12 +72,28 @@ int search(char* name, Graph* graph)
 void addConnection(Graph* graph, char* person, char* friend){
     int p = search(person, graph);//search for the person in the graph,index or position
     int n=numberoflistspresent(graph);
-    
+    // printf("n: %d  p: %d\n", n, p);
     
     
     //insert your code here
-    
-    
+    if (p == -1){
+        if (n >= graph->numberOfVertices){
+            printf("Vertices limit exceeded: %d\n", n);
+            return;
+            }
+        node* newPerson = createNode(person);
+        node* newFriend = createNode(friend);
+        newPerson->next = graph->adjLists[n];
+        graph->adjLists[n] = newPerson; // position: n
+        newPerson->next = newFriend;
+    }
+    else{
+        node* newFriend = createNode(friend);
+        newFriend->next = graph->adjLists[p]->next;
+        graph->adjLists[p]->next = newFriend;
+    }
+
+
     
     
     
