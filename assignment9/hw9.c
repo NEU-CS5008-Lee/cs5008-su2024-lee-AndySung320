@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 
 #include <stdio.h>
@@ -229,6 +229,16 @@ int main () {
   while (!isEmpty(q)) {
 
     // INSERT YOUR CODE HERE
+    int node = dequeue(q);
+    done[node] = true;
+    printf("NODE: %d\n", node);
+    for (int i=0; i < GSIZE; i++){
+        if (E[node][i] && done[i] == false){
+            enqueue(q,i);
+            done[i] = true; // make sure we put the node in queue!!
+                            // avoid putting node repeatily into queue
+        }
+    }
     
   }
 
