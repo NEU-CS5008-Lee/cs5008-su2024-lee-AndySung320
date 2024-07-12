@@ -1,5 +1,5 @@
-// Enter your name here
-//Enter your email here
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -89,7 +89,10 @@ int find_indegree(int arr[][MAX], int node,int n)
     int i,in_deg = 0;
     
     //insert your code here
-    
+    for(i=1 ; i<=n; i++){
+        in_deg += arr[i][node];
+    }
+    return in_deg;
 }
 
 /*Function to perform topological sorting of the Graph */
@@ -102,8 +105,44 @@ void topologicalOrder(int arr[][MAX], Queue *t, int n)
     
     
     //insert your code here
-    
-    
+    for (int i = 0; i <= MAX; i++) {
+        indeg[i] = 0;
+    }
+    // Calculate in-degrees for all vertices
+
+    for (int i = 1; i <= n; i++) {
+        indeg[i] = find_indegree(arr, i, n);
+        // printf("%d ", find_indegree(arr, i, n));
+    }
+    // printf("\n");
+
+    // Enqueue all vertices with in-degree 0
+    for (i = 1; i <= n; i++) {
+        if (indeg[i] == 0) {
+            enqueue(t, i);
+        }
+    }
+
+    while (!isEmpty(t->front)){
+        int front_node = dequeue(t);
+        result[j++] = front_node;
+        for(i=1; i<=n; i++){
+            if(arr[front_node][i] != 0 ){
+                indeg[i]--;
+                if(indeg[i] == 0){  // we should check if indeg[i]==0 inside the loop.
+                                    // if checking the condition outside the loop, 
+                                    // we will enqueue the node that has been enqueued before.
+                    enqueue(t, i);
+                };
+            }
+        }
+        // for(i=1; i<=n; i++){
+        //     if(indeg[i] == 0){
+        //         enqueue(t, i);
+        //     }
+        // }
+    }
+
     
     printf("topological ordering\n");
     for(i=0; i<j;i++)
