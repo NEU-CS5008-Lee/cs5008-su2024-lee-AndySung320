@@ -1,9 +1,13 @@
-//Enter your name here
-//Enter your email here
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
+
+// gcc -IC:/MinGW/include/ philosopher.c -pthread
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
 pthread_mutex_t chopstick[5];//lock variable
+#define THINK_TIME 2 // Time to think (in seconds)
+#define EAT_TIME 2   // Time to eat (in seconds)
 
 // Thread to be executed
 void *philosopher(void *x)
@@ -14,7 +18,27 @@ void *philosopher(void *x)
     
     /*-----Insert your code here----*/
     
-    
+    int left = n;
+    int right = (n + 1) % 5;
+
+    while (1) {
+
+        printf("Philosopher %d is thinking.\n", n+1);
+        sleep(THINK_TIME);
+
+        pthread_mutex_lock(&chopstick[left]);
+        pthread_mutex_lock(&chopstick[right]);
+
+        printf("Philosopher %d is eating using chopstick[%d] and chopstick[%d].\n", n+1, left, right);
+        sleep(EAT_TIME);
+
+        pthread_mutex_unlock(&chopstick[right]);
+        pthread_mutex_unlock(&chopstick[left]);
+        printf("Philosopher %d finished eating.\n", n+1);
+        break;
+    }
+
+    return NULL;
 }
 
 
