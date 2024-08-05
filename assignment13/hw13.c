@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Di-En Sung
+// email: sung.di@northeastern.edu.tw
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -68,8 +68,36 @@ char *decode_rle(char *rle, char *str)
     // Add your code here to decode rle
     //
     //
+    for(int i=0; i<strlen(rle); i++){
+        char c = rle[i];
+        if (!isdigit(c)){
+            j = i+1;
+            while(j<strlen(rle)){
+                char temp = rle[j];
+                if (isdigit(temp)){
+                    count = count*10 + temp - '0';
+                    j++; 
+                }
+                else{
+                    break;
+                }
+            }
+            if(count == 0){
+                count = 1;
+            }
+            while(count > 0){
+                sprintf(decoding, "%c", c);
+                strcat(str, decoding);
+                count--;
+            }
+        }
+        else{
+            continue;
+        }
+    }
 
-    str[i] = '\0';
+
+    //str[i] = '\0';
     return str;
 }
 
